@@ -1,0 +1,12 @@
+Solving the first system using the typical LU decomposition method, we get the solution $x_1 = (1400.06794774, 699.78397387)$. After the slight perturbation, we see that the solution changes quite drastically to $x_2 = (1749.91822625, 874.70911312)$.\bigskip
+
+Clearly, this problem is poorly conditioned/unstable, since we see a larger relative change in output (consider taxicab norm between solution vectors) for a tiny relative change in the input system matrix (consider sum of element-wise absolute differences as the distance metric for the matrices).\bigskip
+
+Putting numbers to it, we have: $d(f(x'), f(x))/||f(x)|| = (|1400.06794774 - 1749.91822625| + |699.78397387 - 874.70911312|) / (1749.91822625 + 874.70911312) = 524.77541776/2624.62733937 \approx 0.1999$ as the relative error in the output and $d(x', x)/||x|| = 10e-3/(2 + 4 + 2.998 + 6.001) \approx 1/15000$ as the relative error in the input. Then, for this input output pair, the ratio of relative errors in the input to the output is $0.1999 \times 15000 \approx 3000$. This shows that at minimum, the condition number of this problem is $3000$ (since there might be input-output pairs with higher relative error ratios). Therefore, we have shown that this is an ill-conditioned problem.\bigskip
+
+Another explanation for this is that the original matrix for this system is nearly dropping rank ($det A \approx 0.01$), as can be seen by multiplying the first equation by $-1.5$:
+
+\begin{align*}
+	&-3x &\ +\ & 6y &\ =\ & 1.5\\
+	&-2.998x &\ +\ & 6.001y &\ =\ & 2
+\end{align*}

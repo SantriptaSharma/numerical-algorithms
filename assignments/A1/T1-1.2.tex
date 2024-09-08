@@ -1,0 +1,12 @@
+Performing the iteration with the given $x_n$s is equivalent to getting the solutions in the interval $[0, 1]$ with a step of $h = 0.1$.\bigskip
+
+This gives us the following results:
+\begin{center}
+    \includegraphics*[width=0.8\textwidth]{res/1.2-divergence.png}
+\end{center}
+
+\begin{center}
+    \includegraphics*[width=0.8\textwidth]{res/1.2-error.png}
+\end{center}
+
+As we can see (and perhaps anticipate), the errors begin mounting as x increases. This is because this method essentially assumes that the given function is locally linear at any given $x_i$. This would be true for an infinitesimal divided difference approximation (i.e $h \rightarrow 0$), but is not true for the given $h = 0.1$.

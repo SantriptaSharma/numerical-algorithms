@@ -1,0 +1,25 @@
+We begin by generating 10 $(a, b, c)$ pairs, each using a uniform sample from the ranges $([10^3, 10^4], [10^12, 10^15], [10^3, 10^5])$, giving us $Q_1, \dots, Q_{10}$:
+
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+		\hline $Q_0$ & $5890.6444761186885$ & $891430632357951.8$ & $43738.71418264905$\\
+		\hline $Q_1$ & $3505.3244658441654$ & $209992919995072.4$ & $94062.95214261509$\\
+		\hline $Q_2$ & $4820.658316742198$ & $186142891330524.97$ & $81947.28849889601$\\
+		\hline $Q_3$ & $8602.985190879133$ & $109268513573790.88$ & $34275.083061968966$\\
+		\hline $Q_4$ & $1042.4697057187532$ & $220477795132367.16$ & $18365.634920491328$\\
+		\hline $Q_5$ & $2094.122087048028$ & $978645160922662.2$ & $37910.372582702395$\\
+		\hline $Q_6$ & $7036.741762541008$ & $811871465940234.0$ & $1563.162227904769$\\
+		\hline $Q_7$ & $8432.67479594543$ & $172769071719861.62$ & $25990.208991039202$\\
+		\hline $Q_8$ & $2230.3593071645764$ & $816408523977114.1$ & $79770.58833885545$\\
+		\hline $Q_9$ & $6175.83996484525$ & $274799673294657.47$ & $2510.242153387562$\\
+		\hline
+	\end{tabular}
+\end{center}
+
+We can then compute their roots using both methods, substitute them into the equations, and check how far they are from the expected value of $0$:
+
+\begin{center}
+	\includegraphics*[width=\textwidth]{res/3.2-compare.png}
+\end{center}
+
+We can see how in the cases that the standard root solver fails (evaluation $\ne$ 0), the alternate method still holds stable.

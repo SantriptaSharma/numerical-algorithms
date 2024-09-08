@@ -1,0 +1,17 @@
+Here is the plot of iteration $i$ vs $I_i$:
+
+\begin{center}
+	\includegraphics*[width=0.8\textwidth]{res/3.3-single.png}
+\end{center}
+
+We can see that, although some noise exists before this point, there is a sudden deviation at $i = 19$. To investigate why this happens, we step back and find that for all iterations $i < 18$, the term $X_i = i * I_{i - 1} < 0.95$. However, at $i = 18$, this term becomes $1.0294536707515363$. Note that this should never happen, since this is a completely positive integral, but it likely happens due to the error accumulation over the previous iterations.\bigskip
+
+Once it happens, $I_{18} := 1 - X_{18} = 1 - 1.0294536707515363$, which, due to being a subtraction of two nearby values, loses precision (catastrophic cancellation), netting the value of $I_{18} = -0.029453670751536265$ which appends some junk digits to the number. This causes problems further down the chain, as $X_{19}$, also negative gets reflected about $1$, resulting in the $I_{19}$ becoming greater than $1$, setting off an immediate explosion due to the $X$ term in future iterations, leading to the kind of error we see.\bigskip
+
+We see a similar pattern in the case with the alternate iteration, as shown here:
+
+\begin{center}
+	\includegraphics*[width=0.8\textwidth]{res/3.3-double.png}
+\end{center}
+
+Here, we've excluded the last 5 terms, as the error there blows up towards a scale of $10e6$, where it becomes hard to see the trend. However, we see a similar pattern, although it occurs much earlier. We then claim that the first form is more numerically stable.

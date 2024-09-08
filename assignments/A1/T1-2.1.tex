@@ -1,0 +1,30 @@
+Solving the differential equation using euler's method, setting $y_0$ in all cases to be the best available approximation to $\pi$, with $x_0 = 0, x_n = 10, h = 0.1, \pi_8 = 3.14159265, \pi_9 = 3.141592654$, we observe the following results:
+
+\begin{center}
+	\includegraphics*[width=0.8\textwidth]{res/2.1-plots.png}
+\end{center}
+
+We see that while both the $y_8$ and $y_9$ approximations are close to each other, they do not estimate the true $y$ value at any of the given points too well. The explanation here is quite simple. In the actual function, $\pi\cdot y_0/[y_0 + (\pi - y_0)e^{x^2}]$, when $y_0 := \pi$, we get:
+
+\begin{align*}
+	&\frac{\pi^2}{\pi + 0\cdot e^{x^2}}\\
+	=\ &\pi
+\end{align*}
+
+Giving us the constant, true (where both $\pi$ and $y_0$ are the best computer approximations to $\pi$), function $y$. However, when we use the rounded estimates of $\pi$ in $y_8' = (2 / \pi_8) \cdot x \cdot y_8(y_0 - \pi)$, both the $\exp(\dots)$ term in the denominator (within $y_8$) and the $x \leftarrow y_0 - \pi$ term in the argument to $y_8$ do not vanish, giving us the faulty approximation.\bigskip
+
+We can now plot the difference in the errors as a function of $x$, using $|y_8 - y| - |y_9 - y| = e(\pi_8) - e(\pi_9)$ as the error term:
+
+\begin{center}
+	\includegraphics*[width=0.8\textwidth]{res/2.1-error-diff.png}
+\end{center}
+
+Besides informing us that both approximations yield similar functions ($\Delta err$ is of the order of $1e-7$), this also tells us that the error is always higher for the less precise (8-digit) approximation of $\pi$ than the more precise (9-digit) approximation, which aligns well with our intuition of what should happen. To put this intuition to the test, we can also repeat this comparison for $\pi_9$ and $\pi_{10}$, a 10-digit rounded approximation to $\pi$. With this, we see the following error difference:
+
+\begin{center}
+	\includegraphics*[width=0.8\textwidth]{res/2.1-error-diff-10.png}
+\end{center}
+
+...which now seems counterintuitive. One possible reason for this is that the gains in accuracy from accuracy from one more digit of precision here are counteracted by the increased accumulation of error during the many $(y_0 - \pi)$ subtractions in the process. This subtraction is problematic because of our choice of $y_0$ as the best available approximation to $\pi$. Then, when $\pi$ is replaced by $\pi_9$ or $\pi_10$, we have a subtraction which ends up dropping most of our significant digits.\bigskip
+
+Since the loss in precision is roughly positively correlated with how close $y_0$ is to our approximation of $\pi$, $\pi_10$ accumulates more error due to this issue, which \textbf{could} be the cause of the observed inversion of ordering.

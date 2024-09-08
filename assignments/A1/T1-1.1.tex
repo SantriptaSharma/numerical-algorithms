@@ -1,0 +1,23 @@
+Analytically, this integral resolves to $[-\cos x]^\pi_0 = [\cos x]^0_\pi = 1 - 0 = 1$.\bigskip
+
+Upon implementation, the following results are observed:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline \textbf{h} & \textbf{computed} & \textbf{iterations}\\
+        \hline 0.1 & 0.9968552726849 & 32\\
+        \hline 0.01 & 0.9999529779172 & 315\\
+        \hline 0.001 & 0.9999997733473 & 3142\\
+        \hline 1e-04 & 0.9999999989689 & 31416\\
+        \hline 1e-05 & 0.9999999999554 & 314160\\
+        \hline 1e-06 & 0.9999999999947 & 3141593\\
+        \hline 1e-07 & 1.0000000002856 & 31415927\\
+        \hline 
+    \end{tabular}
+\end{center}
+
+As expected, the number of iterations approaches $\pi \times 10^i$ as $h$ approaches $10^{-i}$. Since each tenfold increase in the number of iterations leads to a two more digits of precision (taking $0.9999...$ to be the target), we have linear convergence (error decreases $100$-fold for each $10$-fold increase in iterations).
+
+\begin{center}
+    \includegraphics*[width=0.6\textwidth]{res/1.1-convergence.png}
+\end{center}

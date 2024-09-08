@@ -1,0 +1,5 @@
+Consider the set $X = \{1e43 + i, 0 \leq i \leq 10\}$. Using the alternative formula here returns the variance as $-2.7606985387162255e+70$, which is negative, therefore clearly incorrect. The actual value, which is correctly returned by the first method is $1.532495540865889e+54$.\bigskip
+
+The reason this happens is because we have a set of large numbers which are very bunched up. So, the $\sum x_i^2$ term can essentially be approximated by $n\cdot x_1^2$. Similarly, in the mean, the $\sum x_i$ term can be replaced by $n\cdot x_1$, therefore, $\overline{x}^2 = \left(\frac{n\cdot x_i}{n}\right)^2 = x_1^2$. Similarly, the first term, when divided by $n$, yields $x_1^2$ as well.\bigskip
+
+So, we are performing a subtraction of two numbers $a, b$, both of which are very close to $x_1^2$, which is very big. This leads to a catastrophic cancellation, a large drop in precision, leading to our erroneous answer.
