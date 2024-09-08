@@ -1,0 +1,59 @@
+To perform any addition, we first need to align the numbers by shifting the number with the smaller exponent to align its exponent with the larger number.
+
+\textbf{Forward Pass}
+\begin{enumerate}
+	\item $x_1 + x_2$: \begin{itemize}
+		\item \textbf{Shift} $0.3429 \times 10^0 = 0.03429 \times 10^1$
+		\item \textbf{Chop} to $0.0342 \times 10^1$
+		\item \textbf{Add} $10^1 \times (0.1234 + 0.0342) = 0.1576 \times 10^1$
+	\end{itemize}
+
+	\item $(x_1 + x_2) + x_3$: \begin{itemize}
+		\item \textbf{Shift} $0.1289 \times 10^{-1} = 0.001289 \times 10^1$
+		\item \textbf{Chop} to $0.0012 \times 10^1$
+		\item \textbf{Add} $10^1 \times (0.1576 + 0.0012) = 0.1588 \times 10^1$
+	\end{itemize}
+
+	\item $(x_1 + x_2 + x_3) + x_4$: \begin{itemize}
+		\item \textbf{Shift} $0.9895 \times 10^{-3} = 0.00009895 \times 10^1$
+		\item \textbf{Chop} to $0.0000 \times 10^1$
+	\end{itemize}
+
+	\item $(x_1 + x_2 + x_3 + x_4) + x_5$: \begin{itemize}
+		\item \textbf{Shift} $0.9763 \times 10^{-5} = 0.0000009895 \times 10^1$
+		\item \textbf{Chop} to $0.0000 \times 10^1$
+	\end{itemize}
+\end{enumerate}
+
+Therefore, we get the result $0.1588 \times 10^1$. Notice how the last two values vanish.
+
+\textbf{Backward Pass}
+\begin{enumerate}
+	\item $x_5 + x_4$: \begin{itemize}
+		\item \textbf{Shift} $0.9763 \times 10^{-5} = 0.009763 \times 10^{-3}$
+		\item \textbf{Chop} to $0.0097 \times 10^{-3}$
+		\item \textbf{Add} $10^{-3} \times (0.0097 + 0.9895) = 0.9992 \times 10^{-3}$
+	\end{itemize}
+
+	\item $(x_5 + x_4) + x_3$: \begin{itemize}
+		\item \textbf{Shift} $0.9992 \times 10^{-3} = 0.009992 \times 10^{-1}$
+		\item \textbf{Chop} to $0.0099 \times 10^{-1}$
+		\item \textbf{Add} $10^{-1} \times (0.0099 + 0.1289) = 0.1388 \times 10^{-1}$
+	\end{itemize}
+
+	\item $(x_5 + x_4 + x_3) + x_2$: \begin{itemize}
+		\item \textbf{Shift} $0.1388 \times 10^{-1} = 0.01388 \times 10^0$
+		\item \textbf{Chop} to $0.0138 \times 10^0$
+		\item \textbf{Add} $10^0 \times (0.3429 + 0.0138) = 0.3567 \times 10^{0}$
+	\end{itemize}
+
+	\item $(x_5 + x_4 + x_3 + x_2) + x_1$: \begin{itemize}
+		\item \textbf{Shift} $0.3567 \times 10^{0} = 0.03567 \times 10^1$
+		\item \textbf{Chop} to $0.0356 \times 10^1$
+		\item \textbf{Add} $10^1 \times (0.0356 + 0.1234) = 0.1590 \times 10^1$
+	\end{itemize}
+\end{enumerate}
+
+Which gives us the result $0.1590 \times 10^1$. Here, no values vanish, meaning that the result is expected to be more accurate.\bigskip
+
+The exact answer is $1.590789263$, and as expected the backwards pass is more accurate. This is because, in the forward pass, since we always align to the higher exponent to maintain normalisation, the small values added later leave the window of the positional number system, leading to their values not being accounted for in the final sum.

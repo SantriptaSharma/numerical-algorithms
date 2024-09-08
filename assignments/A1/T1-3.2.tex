@@ -1,4 +1,4 @@
-We begin by generating 10 $(a, b, c)$ pairs, each using a uniform sample from the ranges $([10^3, 10^4], [10^12, 10^15], [10^3, 10^5])$, giving us $Q_1, \dots, Q_{10}$:
+We begin by generating 10 $(a, b, c)$ pairs, each using a uniform sample from the ranges $([10^3, 10^4], [10^{12}, 10^{15}], [10^3, 10^5])$, giving us $Q_1, \dots, Q_{10}$:
 
 \begin{center}
 	\begin{tabular}{|c|c|c|c|}
@@ -22,4 +22,4 @@ We can then compute their roots using both methods, substitute them into the equ
 	\includegraphics*[width=\textwidth]{res/3.2-compare.png}
 \end{center}
 
-We can see how in the cases that the standard root solver fails (evaluation $\ne$ 0), the alternate method still holds stable.
+We can see how in the cases that the standard root solver fails (evaluation $\ne$ 0), the alternate method still holds stable. This is because the standard method has potential to incur catastrophic cancellation due to the $-b$ term in the quadratic formula, which can lead to a loss of precision. The alternate method, however, does not have this term, and is therefore more stable.

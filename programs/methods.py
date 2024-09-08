@@ -14,6 +14,7 @@ def trapezoid_integral(f, a: float, b: float, h = 0.5) -> tuple[float, float]:
 		area += height * h
 
 		x = next_x
+		left = f(x)
 		iterations += 1
 
 	return area, iterations

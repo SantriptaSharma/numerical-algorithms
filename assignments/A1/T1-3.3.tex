@@ -14,4 +14,4 @@ We see a similar pattern in the case with the alternate iteration, as shown here
 	\includegraphics*[width=0.8\textwidth]{res/3.3-double.png}
 \end{center}
 
-Here, we've excluded the last 5 terms, as the error there blows up towards a scale of $10e6$, where it becomes hard to see the trend. However, we see a similar pattern, although it occurs much earlier. We then claim that the first form is more numerically stable.
+Here, we've excluded the last 5 terms, as the error there blows up towards a scale of $10e6$, where it becomes hard to see the trend. However, we see a similar pattern, although it occurs much earlier. We then claim that the first form is more numerically stable. This is possibly because the alternate form has a $k^2$ term in the product with $I_{i-2}$, which means that once things start blowing up, they blow up much faster. 
