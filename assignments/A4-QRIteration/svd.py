@@ -2,14 +2,12 @@ import numpy as np
 from eigen import practical_qr
 
 def svd(A: np.ndarray) -> tuple[np.ndarray, np.array, np.ndarray]:
-	transpose = False
-
 	m, n = A.shape
+	transpose = m < n
 
-	if m < n:
+	if transpose:
 		A = A.T
 		m, n = n, m
-		transpose = True
 
 	corr = A.T @ A
 

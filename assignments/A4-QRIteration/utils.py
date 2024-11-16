@@ -15,9 +15,12 @@ def make_upper_hessenberg(A: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
 	"""
 
 	_, n = A.shape
-	
+
 	A = A.copy()
 	Q = np.eye(n)
+
+	if n == 1:
+		return A, Q
 
 	e = np.zeros(n - 1)
 	e[0] = 1
@@ -47,8 +50,12 @@ def hessenberg_qr(H: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
 
 	_, n = H.shape
 
-	Qt = np.eye(n)
 	R = H.copy()
+	Qt = np.eye(n)
+
+	if n == 1:
+		return Qt, R
+
 
 	e = np.array([1, 0])
 
