@@ -48,13 +48,13 @@ def conj_grad(A: np.ndarray, b: np.ndarray, x0: np.ndarray | None = None, max_it
 		# again, could be sped up w the update rule, but dont care for now
 		new_res = -calc_grad(x)
 
-		if np.linalg.norm(new_res) < EPS:
-			break
-
 		beta = np.dot(new_res, new_res) / res_sq
 
 		residual = new_res
 		residuals.append(residual)
+    
+		if np.linalg.norm(residual) < EPS:
+			break
 
 		d = residual + beta * d
 
