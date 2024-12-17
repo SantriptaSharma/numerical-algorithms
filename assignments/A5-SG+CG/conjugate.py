@@ -65,7 +65,7 @@ if __name__ == "__main__":
 	A = np.array([[3, 2], [2, 6]])
 	b = np.array([2, -8])
 
-	x0 = None
+	x0 = np.array([500, 230])
 
 	x, val, its, xs, residuals = conj_grad(A, b, x0)
 
